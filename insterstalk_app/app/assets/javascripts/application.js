@@ -15,3 +15,7 @@
 
 //= require_tree .
 
+$(function(){
+  var controller = new HomeController
+  HomeController.start
+});
