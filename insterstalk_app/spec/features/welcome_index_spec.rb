@@ -1,9 +1,5 @@
 describe "the search location process", :type => :feature do
-  before :each do
-    User.make(:email => 'user@example.com', :password => 'caplin')
-  end
-
-  it "signs me in" do
+  it "searches for a location" do
     visit '/'
     within("#search") do
       fill_in 'location', :with => '15 walter street te aro'
