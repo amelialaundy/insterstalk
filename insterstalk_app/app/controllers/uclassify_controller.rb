@@ -1,0 +1,2 @@
+class UclassifyController < ApplicationController
+end
