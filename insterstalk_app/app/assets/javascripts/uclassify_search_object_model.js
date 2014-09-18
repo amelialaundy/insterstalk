@@ -4,9 +4,8 @@ function UclassifySearchObject() {
 
 UclassifySearchObject.prototype = {
   search: function(searchQuery, callback) {
-    var noCommas = searchQuery.replace(/,/g, "+")
-    var noSpaces = noCommas.replace(/ +/g, "+")
-    var url = this.url + noSpaces;
+    var sanitzedUri = searchQuery.replace(/,/g, "+").replace(/ +/g, "+").replace(/[^\x00-\x7F]/g, "")
+    var url = this.url + sanitzedUri;
      var ajaxRequest = $.ajax({
       url: url,
       type: "GET",

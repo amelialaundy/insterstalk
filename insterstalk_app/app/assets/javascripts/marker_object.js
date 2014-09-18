@@ -1,9 +1,12 @@
-function markerObject(lat, lng, url, link, username) {
-    this.lat = lat
-    this.lng = lng
-    this.link = link
-    this.url = url
-    this.username = username
+function markerObject(options) {
+  var options = options || {};
+  console.log(options)
+
+    this.lat = options.lat
+    this.lng = options.lng
+    this.userlink = options.userlink
+    this.image = options.image
+    this.username = options.username
     this.open = true
 }
 

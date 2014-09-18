@@ -3,21 +3,22 @@ function HomeController() {
   this.googleMapLocationSearch = new GoogleMapLocationSearchObject();
   this.uclassifySearch = new UclassifySearchObject();
   this.view = new View();
+  this.allTags = [];
+
 }
 
 HomeController.prototype = {
   start: function() {
-    console.log("start function home controller")
     this.bindEvents();
     this.view.initializeMap();
   },
 
   bindEvents: function() {
-    console.log("binding")
     $(this.view.searchButton).on("click", this.searchGoogleMapLocation.bind(this))
   },
 
   searchGoogleMapLocation: function(e) {
+    this.allTags = [];
     console.log(e)
     e.preventDefault();
     var addressForSearch = this.view.getAddress();
@@ -34,24 +35,28 @@ HomeController.prototype = {
   },
 
   setUpGoogleMapMarkerObjects: function(instagramSearchResults) {
-    var allTags = this.createMarkers(instagramSearchResults)
-    this.uclassifySearch.search(allTags.join(" "), this.renderTopics.bind(this))
+    this.createMarkers(instagramSearchResults)
+    this.uclassifySearch.search(this.allTags.join(" "), this.renderTopics.bind(this))
   },
 
   createMarkers: function(instagramSearchResults) {
-    var allTags = []
     $.each(instagramSearchResults, function(i, result) {
-      var lat = result['location']['latitude']
-      var lng = result['location']['longitude']
-      var link = result['link']
-      var imgLink = result['images']['thumbnail']['url']
-      var username = result['user']['username']
-      var tags = result['tags']
-      var newMarker = new markerObject(lat, lng, imgLink, link, username)
+      var options = this.markerOptions(result);
+      var newMarker = new markerObject(options);
       this.view.renderMapInstagramMarkers(newMarker);
-      allTags.push(tags);
+      this.allTags.push(options['tags']);
     }.bind(this))
-    return allTags
+  },
+
+  markerOptions: function(result) {
+    return {
+      lat: result['location']['latitude'],
+      lng: result['location']['longitude'],
+      userlink: result['link'],
+      image: result['images']['thumbnail']['url'],
+      username: result['user']['username'],
+      tags: result['tags']
+    }
   },
 
   renderTopics: function(data) {

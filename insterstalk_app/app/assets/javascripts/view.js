@@ -41,7 +41,7 @@ function View() {
         animation: google.maps.Animation.DROP,
         title: newMarker.url
       };
-      var contentString = "<div id='img-info'><img src='"+newMarker.url+"'/><a href='"+newMarker.link+"' target='_blank'><p>"+newMarker.username+"</p></a></div>";
+      var contentString = "<div id='img-info'><img src='"+newMarker.image+"'/><a href='"+newMarker.userlink+"' target='_blank'><p>"+newMarker.username+"</p></a></div>";
       var infowindow = new google.maps.InfoWindow({
         content: contentString
       });
@@ -56,7 +56,7 @@ function View() {
           infowindow.close(this.map,newMapMarker);
           newMarker.open = true
         }
-        });
+      });
     },
 
     renderClassifiedResult: function(results) {
