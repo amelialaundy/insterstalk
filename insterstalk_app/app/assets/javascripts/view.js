@@ -33,6 +33,17 @@ function View() {
     },
 
     renderMapInstagramMarkers: function(newMarker) {
+      var infoWindow = this.createInfoWindow(newMarker);
+      var newMapMarker =  this.createMarker(newMarker);
+      this.addEventListenerToMarker(newMapMarker, newMarker, infoWindow);
+
+
+
+
+
+    },
+
+    createMarker: function(newMarker) {
       var newMapMarkerOptions = {
         map: this.map,
         zoom: 8,
@@ -41,19 +52,26 @@ function View() {
         animation: google.maps.Animation.DROP,
         title: newMarker.url
       };
+      var newMapMarker = new google.maps.Marker( newMapMarkerOptions)
+      console.log(newMarker.open)
+      return newMapMarker
+    },
+
+    createInfoWindow: function(newMarker) {
       var contentString = "<div id='img-info'><img src='"+newMarker.image+"'/><a href='"+newMarker.userlink+"' target='_blank'><p>"+newMarker.username+"</p></a></div>";
       var infowindow = new google.maps.InfoWindow({
         content: contentString
       });
-      var newMapMarker = new google.maps.Marker( newMapMarkerOptions)
-      console.log(newMarker.open)
+      return infowindow
+    },
 
+    addEventListenerToMarker: function(newMapMarker, newMarker, infoWindow) {
       google.maps.event.addListener(newMapMarker, 'click', function() {
         if (newMarker.open === true) {
-          infowindow.open(this.map,newMapMarker);
+          infoWindow.open(this.map,newMapMarker);
           newMarker.open = false
         } else {
-          infowindow.close(this.map,newMapMarker);
+          infoWindow.close(this.map,newMapMarker);
           newMarker.open = true
         }
       });
