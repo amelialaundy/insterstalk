@@ -41,20 +41,23 @@ function View() {
         animation: google.maps.Animation.DROP,
         title: newMarker.url
       };
-      var contentString = "<div id='img-info'><img src='"+newMarker.url+"'/><a href='"+newMarker.link+"'><p>"+newMarker.username+"</p></a></div>";
+      var contentString = "<div id='img-info'><img src='"+newMarker.url+"'/><a href='"+newMarker.link+"' target='_blank'><p>"+newMarker.username+"</p></a></div>";
       var infowindow = new google.maps.InfoWindow({
         content: contentString
       });
       var newMapMarker = new google.maps.Marker( newMapMarkerOptions)
+      console.log(newMarker.open)
 
       google.maps.event.addListener(newMapMarker, 'click', function() {
+        if (newMarker.open === true) {
           infowindow.open(this.map,newMapMarker);
+          newMarker.open = false
+        } else {
+          infowindow.close(this.map,newMapMarker);
+          newMarker.open = true
+        }
         });
     },
-
-
-
-
 
     renderClassifiedResult: function(results) {
       $(this.tagSpace).html("");

@@ -4,5 +4,7 @@ function markerObject(lat, lng, url, link, username) {
     this.link = link
     this.url = url
     this.username = username
+    this.open = true
 }
+
 

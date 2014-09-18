@@ -44,7 +44,6 @@ HomeController.prototype = {
       var lat = result['location']['latitude']
       var lng = result['location']['longitude']
       var link = result['link']
-      console.log(link)
       var imgLink = result['images']['thumbnail']['url']
       var username = result['user']['username']
       var tags = result['tags']
