@@ -1,7 +1,5 @@
 function markerObject(options) {
   var options = options || {};
-  console.log(options)
-
     this.lat = options.lat
     this.lng = options.lng
     this.userlink = options.userlink

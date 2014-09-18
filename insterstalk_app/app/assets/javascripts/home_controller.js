@@ -4,7 +4,6 @@ function HomeController() {
   this.uclassifySearch = new UclassifySearchObject();
   this.view = new View();
   this.allTags = [];
-
 }
 
 HomeController.prototype = {
