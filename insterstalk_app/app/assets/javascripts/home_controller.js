@@ -43,10 +43,12 @@ HomeController.prototype = {
     $.each(instagramSearchResults, function(i, result) {
       var lat = result['location']['latitude']
       var lng = result['location']['longitude']
+      var link = result['link']
+      console.log(link)
       var imgLink = result['images']['thumbnail']['url']
       var username = result['user']['username']
       var tags = result['tags']
-      var newMarker = new markerObject(lat, lng, imgLink, username)
+      var newMarker = new markerObject(lat, lng, imgLink, link, username)
       this.view.renderMapInstagramMarkers(newMarker);
       allTags.push(tags);
     }.bind(this))

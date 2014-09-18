@@ -30,28 +30,25 @@ function View() {
       this.lng = lng;
       this.map.setCenter({lat: this.lat, lng: this.lng})
       this.map.setZoom(15)
-      // return {
-      //   lat: this.lat,
-      //   lng: this.lng
-      // };
     },
 
     renderMapInstagramMarkers: function(newMarker) {
-      var newMarkerOptions = {
+      var newMapMarkerOptions = {
         map: this.map,
         zoom: 8,
         position: new google.maps.LatLng(newMarker.lat, newMarker.lng),
         clickable: true,
+        animation: google.maps.Animation.DROP,
         title: newMarker.url
       };
-      var contentString = "<div id='img-info'><img src='"+newMarker.url+"'/><p>"+newMarker.username+"</p></div>";
+      var contentString = "<div id='img-info'><img src='"+newMarker.url+"'/><a href='"+newMarker.link+"'><p>"+newMarker.username+"</p></a></div>";
       var infowindow = new google.maps.InfoWindow({
         content: contentString
       });
-      var newMarker = new google.maps.Marker( newMarkerOptions)
+      var newMapMarker = new google.maps.Marker( newMapMarkerOptions)
 
-      google.maps.event.addListener(newMarker, 'click', function() {
-          infowindow.open(this.map,newMarker);
+      google.maps.event.addListener(newMapMarker, 'click', function() {
+          infowindow.open(this.map,newMapMarker);
         });
     },
 
