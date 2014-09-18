@@ -10,7 +10,7 @@ function View() {
 
   View.prototype = {
     initializeMap: function() {
-      mapOptions = {
+      var mapOptions = {
         center: new google.maps.LatLng(this.lat, this.lng),
         zoom: this.zoom
       }
@@ -36,15 +36,17 @@ function View() {
       var infoWindow = this.createInfoWindow(newMarker);
       var newMapMarker =  this.createMarker(newMarker);
       this.addEventListenerToMarker(newMapMarker, newMarker, infoWindow);
-
-
-
-
-
     },
 
     createMarker: function(newMarker) {
-      var newMapMarkerOptions = {
+      var options = this.createNewMapMarkerOptions(newMarker);
+      var newMapMarker = new google.maps.Marker(options)
+      console.log(newMarker.open)
+      return newMapMarker
+    },
+
+    createNewMapMarkerOptions: function(newMarker) {
+      return {
         map: this.map,
         zoom: 8,
         position: new google.maps.LatLng(newMarker.lat, newMarker.lng),
@@ -52,9 +54,6 @@ function View() {
         animation: google.maps.Animation.DROP,
         title: newMarker.url
       };
-      var newMapMarker = new google.maps.Marker( newMapMarkerOptions)
-      console.log(newMarker.open)
-      return newMapMarker
     },
 
     createInfoWindow: function(newMarker) {

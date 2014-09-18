@@ -17,6 +17,6 @@
 
 $(document).ready(function(){
   console.log("start")
-  controller = new HomeController();
+  var controller = new HomeController();
   controller.start();
 });
