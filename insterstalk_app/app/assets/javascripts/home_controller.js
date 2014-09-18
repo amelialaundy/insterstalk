@@ -19,7 +19,6 @@ HomeController.prototype = {
 
   searchGoogleMapLocation: function(e) {
     this.allTags = [];
-    console.log(e)
     e.preventDefault();
     var addressForSearch = this.view.getAddress();
     this.googleMapLocationSearch.search(addressForSearch.address, this.searchInstragram.bind(this))

@@ -16,7 +16,6 @@
 //= require_tree .
 
 $(document).ready(function(){
-  console.log("start")
   var controller = new HomeController();
   controller.start();
 });
